@@ -118,6 +118,9 @@ export const BFormInput = /*#__PURE__*/ Vue.extend({
   },
   mounted() {
     this.setWheelStopper(this.noWheel)
+    Object.keys(this.computedListeners).forEach(key => {
+      eventOn(this.$refs.input, key, this.computedListeners[key])
+    })
   },
   /* istanbul ignore next */
   deactivated() {
@@ -134,6 +137,14 @@ export const BFormInput = /*#__PURE__*/ Vue.extend({
   beforeDestroy() {
     /* istanbul ignore next */
     this.setWheelStopper(false)
+    // Manually remove all event listeners
+    Object.keys(this.computedListeners).forEach(key => {
+      eventOff(this.$refs.input, key, this.computedListeners[key])
+    })
+    // To prevent from not being GC, remove the input element explicitly.
+    this.$el?.parentElement?.removeChild(
+      this.$el?.parentElement?.querySelector(`input[id="${this.computedAttrs.id}"]`)
+    )
   },
   methods: {
     setWheelStopper(on) {
@@ -161,7 +172,6 @@ export const BFormInput = /*#__PURE__*/ Vue.extend({
       class: this.computedClass,
       attrs: this.computedAttrs,
       domProps: { value: this.localValue },
-      on: this.computedListeners,
       ref: 'input'
     })
   }
