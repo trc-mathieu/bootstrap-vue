@@ -12913,7 +12913,8 @@ var BFormInput = /*#__PURE__*/Vue.extend({
       eventOff(_this2.$refs.input, key, _this2.computedListeners[key]);
     }); // To prevent from not being GC, remove the input element explicitly.
 
-    (_this$$el = this.$el) === null || _this$$el === void 0 ? void 0 : (_this$$el$parentEleme = _this$$el.parentElement) === null || _this$$el$parentEleme === void 0 ? void 0 : _this$$el$parentEleme.removeChild((_this$$el2 = this.$el) === null || _this$$el2 === void 0 ? void 0 : (_this$$el2$parentElem = _this$$el2.parentElement) === null || _this$$el2$parentElem === void 0 ? void 0 : _this$$el2$parentElem.querySelector("input[id=\"".concat(this.computedAttrs.id, "\"]")));
+    var inputEl = (_this$$el = this.$el) === null || _this$$el === void 0 ? void 0 : (_this$$el$parentEleme = _this$$el.parentElement) === null || _this$$el$parentEleme === void 0 ? void 0 : _this$$el$parentEleme.querySelector("input[id=\"".concat(this.computedAttrs.id, "\"]"));
+    inputEl && ((_this$$el2 = this.$el) === null || _this$$el2 === void 0 ? void 0 : (_this$$el2$parentElem = _this$$el2.parentElement) === null || _this$$el2$parentElem === void 0 ? void 0 : _this$$el2$parentElem.removeChild(inputEl));
   },
   methods: {
     setWheelStopper: function setWheelStopper(on) {
