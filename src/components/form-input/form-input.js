@@ -142,9 +142,8 @@ export const BFormInput = /*#__PURE__*/ Vue.extend({
       eventOff(this.$refs.input, key, this.computedListeners[key])
     })
     // To prevent from not being GC, remove the input element explicitly.
-    this.$el?.parentElement?.removeChild(
-      this.$el?.parentElement?.querySelector(`input[id="${this.computedAttrs.id}"]`)
-    )
+    const inputEl = this.$el?.parentElement?.querySelector(`input[id="${this.computedAttrs.id}"]`)
+    inputEl && this.$el?.parentElement?.removeChild(inputEl)
   },
   methods: {
     setWheelStopper(on) {
